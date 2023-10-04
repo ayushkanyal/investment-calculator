@@ -1,0 +1,1 @@
+An investment Calulator I made using simple intrest calculation formulas. Making this project from scratch helped me get a better understanding of creating components, props, lifting state up, the useState effect and outputting results conditionally in react.
