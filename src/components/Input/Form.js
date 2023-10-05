@@ -29,7 +29,6 @@ export default function Form(props) {
       "expected-return": "",
       'duration': "",
     });
-    console.log(inputs);
   }
 
   return (
