@@ -1,22 +1,19 @@
-import {useState} from "react";
+import { useState } from "react";
 import Header from "./components/Header";
 import Form from "./components/Input/Form";
 import Table from "./components/Result Output/Table";
 
 function App() {
+  const [input, setInput] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [returns, setReturns] = useState([]);
 
-  function fetchSubmit(value){
-    console.log("I was clicked");
-    console.log(value);
-    const returns = calculateHandler(value);
+  function fetchSubmit(value) {
+    console.log(value["current-savings"]);
+    setInput(value["current-savings"]);
     setIsSubmitted(true);
-    transferData(returns);
+    setReturns(calculateHandler(value));
   }
-
-  function transferData(calculation){
-    return calculation;
-  }  
 
   function calculateHandler(userInput) {
     // Should be triggered when form is submitted
@@ -38,14 +35,13 @@ function App() {
         year: i + 1,
         yearlyInterest: yearlyInterest,
         savingsEndOfYear: currentSavings,
-        yearlyContribution: yearlyContribution,
+        yearlyContribution: yearlyContribution
       });
     }
 
     // do something with yearlyData ...
-    console.log(yearlyData);
     return yearlyData;
-  };
+  }
 
   return (
     <div>
@@ -55,8 +51,9 @@ function App() {
       {/* Todo: Show below table conditionally (only once result data is available) */}
       {/* Show fallback text if no data is available */}
 
-      {isSubmitted ? <Table result={transferData} /> : ""}
-
+      {isSubmitted ? (
+        <Table data={returns} investment={input} />
+      ) : ("")}
     </div>
   );
 }
