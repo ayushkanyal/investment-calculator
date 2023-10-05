@@ -1,15 +1,27 @@
 import style from "./TableData.module.css";
+import TableRow from "./TableRow";
 
-export default function TableRow(props) {
+export default function TableData(props) {
+  const list = props.calculation;
+  const investment = +props.contribution;
   return (
     <tbody className={style.tbody}>
-      <tr>
-        <td>{2023 + props.year}2023</td>
-        <td>{props.savings}5000</td>
-        <td>{props.intrest}12</td>
-        <td>{props.totalIntrest}2500</td>
-        <td>{props.totalCapital}10000</td>
-      </tr>
+      {list.map((entry) => (
+        <TableRow
+          key={list.indexOf(entry)}
+          year={entry.year}
+          savings={entry.savingsEndOfYear}
+          intrest={entry.yearlyInterest}
+          totalIntrest={
+            entry.savingsEndOfYear -
+            investment -
+            (entry.yearlyContribution * entry.year)
+          }
+          totalCapital={
+            investment + (entry.yearlyContribution * entry.year)
+          }
+        />
+      ))}
     </tbody>
   );
 }
